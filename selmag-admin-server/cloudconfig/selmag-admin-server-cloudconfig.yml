@@ -1,0 +1,49 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://host.docker.internal:8083/realms/selmag
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://host.docker.internal:8083/realms/selmag
+        registration:
+          keycloak:
+            authorization-grant-type: client_credentials
+            scope:
+              - metrics
+            client-id: admin-service
+            client-secret: wolGlYQihurS2kuJjDZoDdfMVeMK5YXy
+          discovery:
+            provider: keycloak
+            client-id: admin-service
+            client-secret: wolGlYQihurS2kuJjDZoDdfMVeMK5YXy
+            authorization-grant-type: client_credentials
+            scope:
+              - discovery
+          login:
+            provider: keycloak
+            scope:
+              - metrics
+              - openid
+            client-id: admin-service
+            client-secret: wolGlYQihurS2kuJjDZoDdfMVeMK5YXy
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - prometheus
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: false
+  instance:
+    prefer-ip-address: true
+
+#debug: true
