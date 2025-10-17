@@ -1,0 +1,25 @@
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            user-name-attribute: preferred_username
+            issuer-uri: http://host.docker.internal:8083/realms/selmag
+        registration:
+          keycloak:
+            client-id: eureka-server
+            client-secret: 7L4yhA8QsJL5mwstFqhzLr8Rvao0cYVE
+            scope:
+              - openid
+      resourceserver:
+        jwt:
+          issuer-uri: http://host.docker.internal:8083/realms/selmag
