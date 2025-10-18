@@ -51,7 +51,7 @@ springdoc:
       use-pkce-with-authorization-code-grant: true
 
 keycloak:
-  uri: http://localhost:8083
+  uri: http://host.docker.internal:8083
 
 management:
   health:
